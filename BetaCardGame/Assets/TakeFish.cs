@@ -16,11 +16,11 @@ public class TakeFish : MonoBehaviour
     public ItemData[] letters;
 
     public List<ItemData> Current_letters;
-    
+
     public List<Image> images;
 
     public FishingLine fishLine;
-    
+
     private Bone lineBone;
 
     private bool isCatching = false;
@@ -37,7 +37,7 @@ public class TakeFish : MonoBehaviour
             bool findCorrectFish = false;
             int index = 0;
 
-            fishName = fishName.ToUpper(); 
+            fishName = fishName.ToUpper();
             foreach (ItemData letter in Current_letters)
             {
                 if (fishName.Contains(letter.itemName.ToString().ToUpper()))
@@ -97,12 +97,21 @@ public class TakeFish : MonoBehaviour
 
                 if (Vector3.Distance(boneWorldPosition, pointStartCatch.position) < 0.05f)
                 {
-                    StartCoroutine(PlayAnimationAfterDelay(0.4f, "CJ_carching", "CJ_idle"));
+                    Catch();
+                    //StartCoroutine(PlayAnimationAfterDelay(0.4f, "CJ_Fish_catch", "CJ_idle"));
                     isCatching = true;
                 }
             }
         }
     }
+
+    private void Catch()
+    {
+        skeletonAnimation.AnimationState.SetAnimation(0, "CJ_Fish_catch", false);
+        skeletonAnimation.AnimationState.AddAnimation(0, "CJ_idle", true, 1.86f);
+        Destroy(pointFish.gameObject, 0.5f);
+        isCatching = false;
+    } 
 
     private IEnumerator PlayAnimationAfterDelay(float delay, string animationName, string nextAnimation)
     {
@@ -128,8 +137,8 @@ public class TakeFish : MonoBehaviour
 
     public void SetTransparency(float alpha, Image img)
     {
-        Color color = img.color; 
-        color.a = alpha; 
+        Color color = img.color;
+        color.a = alpha;
         img.color = color;
     }
 }

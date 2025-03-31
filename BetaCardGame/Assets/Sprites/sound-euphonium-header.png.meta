@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sound-euphonium-header_0: 585776723322268644
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
